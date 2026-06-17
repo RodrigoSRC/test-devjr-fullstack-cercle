@@ -9,7 +9,8 @@ INSERT INTO cercle_test.resale_order_item (
     shipping_code,
     shipping_status,
     created_at,
-    updated_at
+    updated_at,
+    delivered_at
 ) VALUES
 (
     'b14e75f8-a3d6-4f8d-8a2b-5fbb0cf51001', -- id
@@ -20,8 +21,9 @@ INSERT INTO cercle_test.resale_order_item (
     '219.00', -- amount_value
     'BRTRK1001', -- shipping_code
     'DELIVERED', -- shipping_status
-    '2026-06-08 16:32:00', -- created_at
-    '2026-06-09 10:40:00' -- updated_at
+    '2026-06-01 16:32:00', -- created_at
+    '2026-06-05 10:40:00', -- updated_at
+    '2026-06-05 10:40:00' -- delivered_at
 ),
 (
     'b14e75f8-a3d6-4f8d-8a2b-5fbb0cf51002', -- id
@@ -31,9 +33,10 @@ INSERT INTO cercle_test.resale_order_item (
     1, -- quantity
     '319.00', -- amount_value
     'BRTRK1001', -- shipping_code
-    'DELIVERED', -- shipping_status
-    '2026-06-08 16:32:05', -- created_at
-    '2026-06-09 10:40:00' -- updated_at
+    'RETURNED', -- shipping_status
+    '2026-06-01 16:32:00', -- created_at
+    '2026-06-05 10:40:00', -- updated_at
+    '2026-06-05 10:40:00' -- delivered_at
 ),
 (
     'b14e75f8-a3d6-4f8d-8a2b-5fbb0cf51003', -- id
@@ -44,8 +47,9 @@ INSERT INTO cercle_test.resale_order_item (
     '349.90', -- amount_value
     'BRTRK1002', -- shipping_code
     'DELIVERED', -- shipping_status
-    '2026-06-10 09:16:00', -- created_at
-    '2026-06-11 08:20:00' -- updated_at
+    '2026-06-13 09:16:00', -- created_at
+    '2026-06-14 09:20:00', -- updated_at
+    '2026-06-14 09:20:00' -- delivered_at
 ),
 (
     'b14e75f8-a3d6-4f8d-8a2b-5fbb0cf51004', -- id
@@ -56,8 +60,9 @@ INSERT INTO cercle_test.resale_order_item (
     '1299.00', -- amount_value
     'BRTRK1003', -- shipping_code
     'CANCELLED', -- shipping_status
-    '2026-06-11 11:43:30', -- created_at
-    '2026-06-11 11:46:00' -- updated_at
+    '2026-06-13 11:43:30', -- created_at
+    '2026-06-13 11:45:55', -- updated_at
+    NULL -- delivered_at
 ),
 (
     'b14e75f8-a3d6-4f8d-8a2b-5fbb0cf51005', -- id
@@ -67,9 +72,10 @@ INSERT INTO cercle_test.resale_order_item (
     1, -- quantity
     '589.50', -- amount_value
     'BRTRK1004', -- shipping_code
-    'WAITING_PAYMENT', -- shipping_status
-    '2026-06-12 14:05:45', -- created_at
-    '2026-06-12 14:06:10' -- updated_at
+    'LABEL_GENERATED', -- shipping_status
+    '2026-06-16 14:05:45', -- created_at
+    '2026-06-16 14:06:10', -- updated_at
+    NULL -- delivered_at
 ),
 (
     'b14e75f8-a3d6-4f8d-8a2b-5fbb0cf51006', -- id
@@ -79,8 +85,9 @@ INSERT INTO cercle_test.resale_order_item (
     1, -- quantity
     '249.99', -- amount_value
     'BRTRK1005', -- shipping_code
-    'SHIPPED', -- shipping_status
-    '2026-06-13 18:20:20', -- created_at
-    '2026-06-14 08:35:00' -- updated_at
+    'POSTED', -- shipping_status
+    '2026-06-17 18:20:20', -- created_at
+    '2026-06-17 18:21:00', -- updated_at
+    NULL -- delivered_at
 )
 ON CONFLICT (id) DO NOTHING;

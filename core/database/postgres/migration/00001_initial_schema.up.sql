@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS cercle_test.resale_order_item (
     amount_value NUMERIC(12,2) NOT NULL DEFAULT 0,
     shipping_code VARCHAR(100),
     shipping_status VARCHAR(50),
+    delivered_at TIMESTAMP NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
     deleted_at TIMESTAMP NULL,

@@ -43,8 +43,8 @@ INSERT INTO cercle_test.resale_order (
     '30.00', -- amount_freight
     '9.52', -- amount_interest
     '577.52', -- amount_total
-    '2026-06-08 16:31:18', -- created_at
-    '2026-06-08 16:31:18' -- updated_at
+    '2026-06-01 16:31:18', -- created_at
+    '2026-06-05 16:31:18' -- updated_at
 ), (
     '7ae28fac-280e-4879-bbe3-9277decb4a07', -- id
     '550e8400-e29b-41d4-a716-446655440003', -- fk_retailer_id (SPORTS STORE)
@@ -66,8 +66,8 @@ INSERT INTO cercle_test.resale_order (
     '19.90', -- amount_freight
     '0.00', -- amount_interest
     '369.80', -- amount_total
-    '2026-06-10 09:15:12.000000', -- created_at
-    '2026-06-10 09:17:40.000000' -- updated_at
+    '2026-06-13 09:15:12.000000', -- created_at
+    '2026-06-14 09:17:40.000000' -- updated_at
 ), (
     '8ae28fac-280e-4879-bbe3-9277decb4a08', -- id
     '550e8400-e29b-41d4-a716-446655440004', -- fk_retailer_id (MM Store)
@@ -89,8 +89,8 @@ INSERT INTO cercle_test.resale_order (
     '0.00', -- amount_freight
     '129.90', -- amount_interest
     '1428.90', -- amount_total
-    '2026-06-11 11:43:10.000000', -- created_at
-    '2026-06-11 11:45:55.000000' -- updated_at
+    '2026-06-13 11:43:10.000000', -- created_at
+    '2026-06-13 11:45:55.000000' -- updated_at
 ), (
     '9ae28fac-280e-4879-bbe3-9277decb4a09', -- id
     '550e8400-e29b-41d4-a716-446655440005', -- fk_retailer_id (Shield Hero)

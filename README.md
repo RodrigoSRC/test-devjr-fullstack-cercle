@@ -78,4 +78,4 @@ Com a API rodando, acesse:
 
 # Em caso de dúvidas
 
-Se você tiver alguma dúvida ou encontrar algum problema, entre em contato com a equipe de desenvolvimento (franklin.salesx@gmail.com) ou abra uma issue no repositório do projeto. Também pode entrar em contato pelo [LinkedIn](https://www.linkedin.com/in/franklindux/).
+Se você tiver alguma dúvida ou encontrar algum problema, entre em contato com a equipe de desenvolvimento (franklinsales@cercle.id) ou abra uma issue no repositório do projeto. Também pode entrar em contato pelo [LinkedIn](https://www.linkedin.com/in/franklindux/).

@@ -16,7 +16,7 @@ Foi requisitado a você a implementação de funcionalidades para o módulo de R
 Você deverá implementar dois endpoints para o módulo de Resale seguindo a arquitetura DDD + Clean Architecture já adotada no projeto.
 
 O primeiro endpoint é um `GET` para listar os itens de um pedido específico.
-O segundo endpoint é um `PUT` para cancelar (soft delete) um item específico de um pedido.
+O segundo endpoint é um `PUT` para cancelar (mudar o status para "RETURNED") um item específico de um pedido.
 
 O módulo **Resale** já possui a estrutura de pastas criada e dois endpoints registrados no router, mas os handlers(core/modules/resale/presentation/handler.go) retornam apenas `TODO`. Sua missão é implementar a lógica completa seguindo os padrões já estabelecidos no projeto.
 
@@ -27,6 +27,22 @@ Você deve implementar a lógica de negócio para ambos os endpoints, garantindo
 ---
 
 ## Endpoints a implementar
+
+### Status possíveis de shipping_status
+
+Considere os seguintes valores para o campo `shipping_status` no contexto deste desafio:
+
+- `LABEL_GENERATED` (ou "etique gerada", quando a etiqueta de envio é gerada, mas o item ainda não foi postado)
+- `POSTED` (ou "postado", quando o item foi postado, mas ainda não foi entregue)
+- `DELIVERED` (ou "entregue", quando o item foi entregue ao comprador)
+- `RETURNED` (ou "devolvido", quando o item foi devolvido pelo comprador)
+- `CANCELLED` (ou "cancelado", quando o item foi cancelado antes do envio ou por algum motivo administrativo)
+
+(os status de pedido aqui não importam para esse teste, somente os dos itens do pedido, que estão na tabela `resale_order_item`)
+
+Observações:
+- Para o endpoint de cancelamento deste desafio, o status final esperado é `RETURNED`.
+- O status `CANCELLED` existe, mas somente para itens que foram cancelados por motivos administrativos ou antes do envio. Ele não deve ser usado para marcar itens como cancelados pelos compradores, que devem usar o status `RETURNED`.
 
 ### `GET /v1/app/users/:cpf/orders/:order_id/items`
 
@@ -55,6 +71,7 @@ Critérios de aceitação:
   "data": [
     {
       "id": "uuid",
+      "fk_resale_order_id": "uuid",
       "sku": "LAB-CAMISETA-001",
       "name": "Camiseta Dry Fit Feminina",
       "quantity": 1,
@@ -76,6 +93,7 @@ Realiza o cancelamento de um item específico de um pedido, marcando-o como canc
 Constraints:
 - O client deve fornecer seu CPF, o ID do pedido e o ID do item para cancelar um item específico.
 - O endpoint deve validar que o pedido pertence ao comprador e que o item pertence ao pedido antes de realizar o cancelamento.
+- Somente itens com 7 dias ou menos após a data de entrega (delivered_at) podem ser cancelados. Itens com mais de 7 dias desde a data de entrega não podem ser cancelados e devem retornar um erro 400.
 
 Critérios de aceitação:
 - O endpoint deve cancelar o item específico do pedido, marcando-o como cancelado (mudando o status do shipping_status para "RETURNED").
