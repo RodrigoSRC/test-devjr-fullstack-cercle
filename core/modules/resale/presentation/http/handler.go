@@ -11,14 +11,17 @@ import (
 )
 
 type Handler struct {
-	listOrderItemsUseCase *usecase.ListOrderItemsUseCase
+	listOrderItemsUseCase  *usecase.ListOrderItemsUseCase
+	cancelOrderItemUseCase *usecase.CancelOrderItemUseCase
 }
 
 func NewHandler(
 	listOrderItemsUseCase *usecase.ListOrderItemsUseCase,
+	cancelOrderItemUseCase *usecase.CancelOrderItemUseCase,
 ) *Handler {
 	return &Handler{
-		listOrderItemsUseCase: listOrderItemsUseCase,
+		listOrderItemsUseCase:  listOrderItemsUseCase,
+		cancelOrderItemUseCase: cancelOrderItemUseCase,
 	}
 }
 
@@ -71,10 +74,34 @@ func (h *Handler) GetOrderItemsByCPFAndOrderID(c *gin.Context) {
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /v1/app/users/{cpf}/orders/{order_id}/items/{item_id}/cancel [put]
 func (h *Handler) CancelOrderItem(c *gin.Context) {
-	httpresponse.Success(c, http.StatusOK, "TODO: /v1/app/users/:cpf/orders/:order_id/items/:item_id/cancel")
+	cpf := c.Param("cpf")
+	orderID := c.Param("order_id")
+	itemID := c.Param("item_id")
+
+	err := h.cancelOrderItemUseCase.Execute(c.Request.Context(), cpf, orderID, itemID)
+	if err != nil {
+		if isResaleValidationError(err) || isResaleBusinessRuleError(err) {
+			httpresponse.DomainBadRequest(c, err)
+			return
+		}
+		if errors.Is(err, domainException.ErrOrderItemNotFound) {
+			httpresponse.DomainNotFound(c, err)
+			return
+		}
+		httpresponse.InternalServerError(c, err.Error())
+		return
+	}
+
+	c.Status(http.StatusNoContent)
 }
 
 func isResaleValidationError(err error) bool {
 	return errors.Is(err, domainException.ErrInvalidOrderID) ||
+		errors.Is(err, domainException.ErrInvalidOrderItemID) ||
 		errors.Is(err, domainException.ErrInvalidUserDocumentNumber)
+}
+
+func isResaleBusinessRuleError(err error) bool {
+	return errors.Is(err, domainException.ErrItemNotEligibleForReturn) ||
+		errors.Is(err, domainException.ErrCancelWindowExpired)
 }
